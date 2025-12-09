@@ -41,7 +41,7 @@ nav {
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #00d4ff;
+    color: #FF6A00;
 }
 
 nav ul {
@@ -58,7 +58,7 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    color: #00d4ff;
+    color: #FF6A00;
 }
 
 /* Hero Section */
@@ -81,7 +81,7 @@ nav ul li a:hover {
 .hero h1 {
     font-size: 3.5rem;
     margin-bottom: 1rem;
-    background: linear-gradient(45deg, #00d4ff, #090979);
+    background: linear-gradient(45deg, #FF6A00, #090979);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: fadeInUp 1s ease-out;
@@ -96,7 +96,7 @@ nav ul li a:hover {
 
 .cta-button {
     display: inline-block;
-    background: linear-gradient(45deg, #00d4ff, #090979);
+    background: linear-gradient(45deg, #FF6A00, #090979);
     color: white;
     padding: 1rem 2rem;
     border-radius: 50px;
@@ -132,7 +132,7 @@ nav ul li a:hover {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 3rem;
-    color: #00d4ff;
+    color: #FF6A00;
 }
 
 .benefits-grid {
@@ -148,12 +148,12 @@ nav ul li a:hover {
     padding: 2rem;
     text-align: center;
     transition: transform 0.3s, box-shadow 0.3s;
-    border: 1px solid rgba(0, 212, 255, 0.2);
+    border: 1px solid rgba(255, 106, 0, 0.4);
 }
 
 .benefit-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 212, 255, 0.2);
+    box-shadow: 0 15px 30px rgba(255, 106, 0, 0.4);
 }
 
 .benefit-card .icon {
@@ -163,7 +163,7 @@ nav ul li a:hover {
 
 .benefit-card h3 {
     margin-bottom: 1rem;
-    color: #00d4ff;
+    color: #FF6A00;
 }
 
 /* Plans Section */
@@ -178,7 +178,7 @@ nav ul li a:hover {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 3rem;
-    color: #00d4ff;
+    color: #FF6A00;
 }
 
 .plans-grid {
@@ -194,17 +194,17 @@ nav ul li a:hover {
     padding: 2rem;
     text-align: center;
     transition: transform 0.3s, box-shadow 0.3s;
-    border: 1px solid rgba(0, 212, 255, 0.2);
+    border: 1px solid rgba(255, 106, 0, 0.4);
 }
 
 .plan-card.popular {
-    border: 2px solid #00d4ff;
+    border: 2px solid #FF6A00;
     transform: scale(1.05);
 }
 
 .plan-card h3 {
     margin-bottom: 1rem;
-    color: #00d4ff;
+    color: #FF6A00;
 }
 
 .plan-card .price {
@@ -224,7 +224,7 @@ nav ul li a:hover {
 }
 
 .buy-button {
-    background: linear-gradient(45deg, #00d4ff, #090979);
+    background: linear-gradient(45deg, #FF6A00, #090979);
     color: white;
     border: none;
     padding: 1rem 2rem;
@@ -249,7 +249,7 @@ nav ul li a:hover {
 .upload-section h2, .gallery-section h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: #00d4ff;
+    color: #FF6A00;
 }
 
 .upload-section p, .gallery-section p {
@@ -262,12 +262,12 @@ nav ul li a:hover {
     backdrop-filter: blur(10px);
     border-radius: 15px;
     padding: 2rem;
-    border: 1px solid rgba(0, 212, 255, 0.2);
+    border: 1px solid rgba(255, 106, 0, 0.4);
 }
 
 .upload-button {
     display: inline-block;
-    background: linear-gradient(45deg, #00d4ff, #090979);
+    background: linear-gradient(45deg, #FF6A00, #090979);
     color: white;
     padding: 1rem 2rem;
     border-radius: 50px;
@@ -288,7 +288,7 @@ nav ul li a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgba(0, 212, 255, 0.5);
+    color: rgba(255, 106, 0, 0.5);
     margin-top: 1rem;
 }
 
@@ -318,7 +318,7 @@ nav ul li a:hover {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 3rem;
-    color: #00d4ff;
+    color: #FF6A00;
 }
 
 .about-content {
@@ -329,7 +329,7 @@ nav ul li a:hover {
 }
 
 .about-text h3 {
-    color: #00d4ff;
+    color: #FF6A00;
     margin-bottom: 1rem;
 }
 
@@ -344,7 +344,7 @@ nav ul li a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgba(0, 212, 255, 0.5);
+    color: rgba(255, 106, 0, 0.5);
     font-size: 1.2rem;
 }
 
@@ -360,7 +360,7 @@ nav ul li a:hover {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 3rem;
-    color: #00d4ff;
+    color: #FF6A00;
 }
 
 .timeline {
@@ -375,7 +375,7 @@ nav ul li a:hover {
     left: 50%;
     width: 2px;
     height: 100%;
-    background: #00d4ff;
+    background: #FF6A00;
     transform: translateX(-50%);
 }
 
@@ -400,7 +400,7 @@ nav ul li a:hover {
     backdrop-filter: blur(10px);
     border-radius: 15px;
     padding: 1.5rem;
-    border: 1px solid rgba(0, 212, 255, 0.2);
+    border: 1px solid rgba(255, 106, 0, 0.4);
     position: relative;
 }
 
@@ -410,7 +410,7 @@ nav ul li a:hover {
     top: 50%;
     width: 20px;
     height: 20px;
-    background: #00d4ff;
+    background: #FF6A00;
     border-radius: 50%;
     transform: translateY(-50%);
 }
@@ -424,7 +424,7 @@ nav ul li a:hover {
 }
 
 .timeline-content h3 {
-    color: #00d4ff;
+    color: #FF6A00;
     margin-bottom: 0.5rem;
 }
 
@@ -439,7 +439,7 @@ nav ul li a:hover {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 3rem;
-    color: #00d4ff;
+    color: #FF6A00;
 }
 
 .faq-grid {
@@ -453,11 +453,11 @@ nav ul li a:hover {
     backdrop-filter: blur(10px);
     border-radius: 15px;
     padding: 1.5rem;
-    border: 1px solid rgba(0, 212, 255, 0.2);
+    border: 1px solid rgba(255, 106, 0, 0.4);
 }
 
 .faq-item h3 {
-    color: #00d4ff;
+    color: #FF6A00;
     margin-bottom: 1rem;
 }
 
@@ -477,7 +477,7 @@ footer {
 }
 
 .footer-section h3 {
-    color: #00d4ff;
+    color: #FF6A00;
     margin-bottom: 1rem;
 }
 
@@ -488,7 +488,7 @@ footer {
 }
 
 .social-icons a {
-    color: #00d4ff;
+    color: #FF6A00;
     transition: color 0.3s;
 }
 
