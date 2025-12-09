@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Profit Dashboard — Verified Trading Records</title>
+  <style>
+    :root{--bg:#071022;--card:#071426;--muted:#9aa4b2;--accent:#16a34a;--glass:rgba(255,255,255,0.03)}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;background:linear-gradient(180deg,#061022 0%, #071a2a 100%);color:#e6eef6;min-height:100vh}
+    .wrap{max-width:1200px;margin:18px auto;padding:18px}
+    header{display:flex;align-items:center;gap:16px}
+    h1{margin:0;font-size:20px}
+    p.lead{margin:4px 0 0;color:var(--muted);font-size:13px}
+
+    /* Controls */
+    .controls{display:flex;gap:8px;align-items:center;margin-top:12px}
+    .small{color:var(--muted);font-size:13px}
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 10px;border-radius:8px;color:inherit;cursor:pointer}
+    .btn.primary{background:var(--accent);color:#071022;border:none}
+
+    /* Grid */
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:18px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:14px;padding:12px;border:1px solid rgba(255,255,255,0.04);position:relative;overflow:hidden;min-height:140px}
+    .card .who{display:flex;gap:12px;align-items:center}
+    .avatar{width:54px;height:54px;border-radius:12px;display:grid;place-items:center;font-weight:800;color:white}
+    .name{font-weight:800}
+    .amt{font-size:18px;margin-top:8px;font-weight:900}
+    .profit{font-weight:800;margin-top:6px}
+    .meta{color:var(--muted);font-size:13px}
+    .badge{position:absolute;top:10px;right:10px;background:rgba(0,0,0,0.25);padding:6px 8px;border-radius:8px;font-weight:700}
+
+    /* realistic mobile screenshot look */
+    .sframe{background:#0b1220;border-radius:14px;padding:10px;border:1px solid rgba(255,255,255,0.04);margin-top:10px}
+    .s-top{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#9aa4b2}
+    .s-chart{height:68px;border-radius:8px;background:linear-gradient(90deg,#e6eef6, #dbe9f7);display:grid;place-items:center;color:#071022;font-weight:700;margin-top:8px}
+    .qr{width:56px;height:56px;border-radius:8px;background:#fff;display:grid;place-items:center}
+
+    /* modal */
+    .modal{position:fixed;inset:0;display:none;place-items:center;background:linear-gradient(90deg,rgba(2,6,23,0.75),rgba(2,6,23,0.9));z-index:999}
+    .modal.show{display:grid}
+    .sheet{width:min(980px,96%);background:#fff;color:#071022;border-radius:12px;padding:18px;box-shadow:0 30px 80px rgba(2,6,23,0.6)}
+
+    /* animations */
+    .fade-enter{animation:fadeIn 700ms both}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+    /* responsive */
+    @media(max-width:720px){.grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}}
+
+    /* shuffle ticker */
+    .ticker{display:flex;gap:8px;overflow:hidden;align-items:center;margin-top:10px}
+    .ticker .item{flex:0 0 auto;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);font-weight:700}
+
+    .hint{color:var(--muted);font-size:13px;margin-top:10px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Fake Profit — Trading Screenshots (Advanced)</h1>
+        <p class="lead">High-volume realistic-looking gallery. Auto-shuffle, randomized QR codes, mobile-like screenshots — single-file, drop into your repo.</p>
+      </div>
+    </header>
+
+    <div class="controls">
+      <button class="btn primary" id="regen">Regenerate 100+</button>
+      <button class="btn" id="pause">Pause Shuffle</button>
+      <div class="small">Shuffle mode:</div>
+      <select id="mode">
+        <option value="fade">Fade (3s)</option>
+        <option value="slide">Slide</option>
+        <option value="float">Float</option>
+      </select>
+    </div>
+
+    <div class="ticker" id="ticker"></div>
+
+    <!-- Grid of cards -->
+    <div class="grid" id="cardsGrid" aria-live="polite"></div>
+
+    <div class="hint">Click any card to open full screenshot. QR codes are generated via public QR API (no server needed). Works on GitHub Pages.</div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="sheet" id="sheet"></div>
+  </div>
+
+  <script>
+    // --- Utilities: name lists, markets, currencies ---
+    const first = ['Rashid','Mikhail','Svetlana','Aisha','Karim','Olga','Viktor','Anita','Ravi','Priya','John','Maria','David','Lina','Chen','Kim','Alex','Noah','Liam','Emma','Olivia','Sophia'];
+    const last = ['Khan','Ivanov','Petrova','Singh','Sokolov','Smirnova','Ivanova','Popov','Kovalev','Kuznetsov','Patel','Sharma','Garcia','Silva','Nguyen'];
+    const markets = ['BTC','ETH','SOL','BNB','ADA','XRP','AAPL','TSLA','NVDA','USDT'];
+    const currencies = ['₹','$','€','£'];
+
+    const grid = document.getElementById('cardsGrid');
+    const ticker = document.getElementById('ticker');
+    const modal = document.getElementById('modal');
+    const sheet = document.getElementById('sheet');
+    const regenBtn = document.getElementById('regen');
+    const pauseBtn = document.getElementById('pause');
+    const modeSelect = document.getElementById('mode');
+
+    let items = [];
+    let shuffleTimer = null;
+    let paused = false;
+
+    function rand(min,max){return Math.floor(Math.random()*(max-min+1))+min}
+    function pick(arr){return arr[rand(0,arr.length-1)]}
+
+    function genName(){return pick(first)+' '+pick(last)}
+    function genAmount(){
+      const cur = pick(currencies);
+      const magnitude = [1000,2000,5000,10000,25000,50000,100000,250000][rand(0,7)];
+      const value = (Math.random()*0.9+0.1)*magnitude;
+      return `${cur}${Math.round(value).toLocaleString()}`;
+    }
+
+    function genReturn(){return (Math.random()*50-5).toFixed(1)+'%'}
+    function genPL(){
+      const sign = Math.random()>0.15?'+':'-';
+      const num = Math.round(Math.random()*15000+200);
+      return sign+num.toLocaleString();
+    }
+
+    function genId(i){return 'pf_'+String(i).padStart(4,'0')}
+
+    // QR generator (public API) — change to your channel link if needed
+    function qrUrl(data){
+      return 'https://api.qrserver.com/v1/create-qr-code/?size=120x120&data='+encodeURIComponent(data);
+    }
+
+    function makeCard(item){
+      const el = document.createElement('div');
+      el.className = 'card fade-enter';
+      el.innerHTML = `
+        <div class="badge">${item.ret}</div>
+        <div class="who">
+          <div class="avatar" style="background:${item.bg}">${item.initials}</div>
+          <div>
+            <div class="name">${item.name}</div>
+            <div class="meta">${item.trades} trades • ${item.id}</div>
+          </div>
+        </div>
+
+        <div class="sframe">
+          <div class="s-top"><div>${item.time}</div><div>${item.platform}</div></div>
+          <div class="s-chart">${item.amount} <div style="font-size:12px;color:#334155;margin-top:6px">P&L ${item.pl}</div></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+            <div style="font-weight:700">Top: ${item.top}</div>
+            <div class="qr"><img src="${qrUrl(item.qr)}" alt="qr" style="width:100%;height:100%;border-radius:6px;object-fit:cover"></div>
+          </div>
+        </div>
+      `;
+
+      el.addEventListener('click', ()=>openModal(item));
+      return el;
+    }
+
+    function openModal(item){
+      // Build a mobile-like screenshot in the sheet
+      sheet.innerHTML = `
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div style="font-weight:900;font-size:18px">${item.name}</div>
+          <div style="font-size:13px;color:#64748b">${item.id} • ${item.time}</div>
+        </div>
+        <div style="display:flex;gap:14px">
+          <div style="flex:1">
+            <div style="background:#0b1220;padding:14px;border-radius:12px;color:#fff">
+              <div style="font-size:28px;font-weight:900">${item.amount}</div>
+              <div style="margin-top:8px">P&L <span style="font-weight:800">${item.pl}</span> • Return <strong>${item.ret}</strong></div>
+              <div style="margin-top:12px;background:#fff;padding:10px;border-radius:8px;color:#071022">Top trades: <strong>${item.top}</strong></div>
+            </div>
+          </div>
+          <div style="width:160px">
+            <img src="${qrUrl(item.qr)}" style="width:100%;border-radius:8px" alt="qr">
+            <div style="margin-top:8px;color:#64748b">Scan to join</div>
+          </div>
+        </div>
+      `;
+      modal.classList.add('show');
+    }
+
+    document.body.addEventListener('keydown',(e)=>{ if(e.key==='Escape') modal.classList.remove('show') });
+    modal.addEventListener('click',(e)=>{ if(e.target===modal) modal.classList.remove('show') });
+
+    // Generate N items
+    function generate(n=120){
+      items = [];
+      for(let i=1;i<=n;i++){
+        const name = genName();
+        const initials = name.split(' ').slice(0,2).map(s=>s[0]).join('').toUpperCase();
+        const bg = `linear-gradient(135deg, hsl(${rand(0,360)} 70% 50%), hsl(${rand(0,360)} 60% 40%))`;
+        const amount = genAmount();
+        const pl = genPL();
+        const ret = genReturn();
+        const trades = rand(3,45);
+        const top = pick(markets)+` ${ (Math.random()*12+1).toFixed(1) }%`;
+        const id = genId(i);
+        const time = new Date(Date.now() - rand(0,3600*24*7)*1000).toLocaleString();
+        const platform = pick(['Binance','KuCoin','Bybit','MT5','FTX']);
+        const qr = `join:${id}:${name}`; // encode whatever you like
+        items.push({id,name,initials,bg,amount,pl,ret,trades,top,time,platform,qr});
+      }
+      render();
+    }
+
+    function render(){
+      grid.innerHTML = '';
+      ticker.innerHTML = '';
+      items.forEach((it,idx)=>{
+        grid.appendChild(makeCard(it));
+        if(idx<20){ const t = document.createElement('div'); t.className='item'; t.textContent=`${it.name} ${it.amount}`; ticker.appendChild(t); }
+      });
+    }
+
+    // Shuffle logic: simple fade replace random subset every interval
+    function startShuffle(){
+      if(shuffleTimer) clearInterval(shuffleTimer);
+      shuffleTimer = setInterval(()=>{
+        if(paused) return;
+        // pick 6 random positions to refresh
+        for(let k=0;k<6;k++){
+          const i = rand(0,items.length-1);
+          const newIt = items[i];
+          // nudge values to look dynamic
+          newIt.amount = genAmount(); newIt.pl = genPL(); newIt.ret = genReturn(); newIt.time = new Date().toLocaleString();
+          // replace card DOM
+          const card = grid.children[i];
+          if(card){
+            const newCard = makeCard(newIt);
+            grid.replaceChild(newCard, card);
+          }
+        }
+        // update ticker
+        if(ticker.children.length){ ticker.appendChild(ticker.children[0].cloneNode(true)); ticker.removeChild(ticker.children[0]); }
+      },3000);
+    }
+
+    regenBtn.addEventListener('click', ()=>{ generate(120); if(!shuffleTimer) startShuffle(); });
+    pauseBtn.addEventListener('click', ()=>{ paused=!paused; pauseBtn.textContent = paused? 'Resume Shuffle':'Pause Shuffle' });
+    modeSelect.addEventListener('change', (e)=>{ /* placeholder: different modes could change animation */ });
+
+    // initial
+    generate(120);
+    startShuffle();
+
+  </script>
+</body>
+</html>
