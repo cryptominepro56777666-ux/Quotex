@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Trader Registration — Earn With Rashid</title>
+  <style>
+    :root{
+      --bg:#0f0f0f;
+      --card:#1a1a1a;
+      --muted:#dcdcdc;
+      --accent:#ff6a00;
+      --panel:#262626;
+      --glow: 0 0 18px rgba(255,106,0,0.25);
+      --rounded:14px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, Poppins, Arial, sans-serif;
+      background: linear-gradient(180deg,#090909 0%, #0f0f0f 100%);
+      color:#fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:28px;
+    }
+    .wrap {
+      max-width:1020px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns: 1fr 380px;
+      gap:22px;
+      align-items:start;
+    }
+    @media (max-width:980px){ .wrap{ grid-template-columns: 1fr; padding:12px } }
+    .card {
+      background:var(--card);
+      border-radius:var(--rounded);
+      padding:20px;
+      box-shadow: var(--glow);
+      border:1px solid rgba(255,106,0,0.12);
+    }
+    h1,h2{ margin:0 0 10px 0; color:var(--accent) }
+    h1{ font-size:20px; text-shadow:0 0 12px rgba(255,106,0,0.18) }
+    .muted { color:var(--muted); font-size:13px }
+    .plans .plan { background:var(--panel); padding:14px; border-radius:12px; margin-bottom:14px; border-left:4px solid var(--accent); }
+    .plan h3{ color:var(--accent); margin:0 0 6px 0; font-size:16px }
+    .plan p{ margin:6px 0; color:var(--muted); font-size:13px }
+    .btn {
+      display:inline-block;
+      padding:10px 14px;
+      border-radius:10px;
+      border:none;
+      cursor:pointer;
+      background:var(--accent);
+      color:#fff;
+      font-weight:700;
+      box-shadow: 0 6px 20px rgba(255,106,0,0.18);
+    }
+    .btn.small { padding:8px 10px; font-size:13px }
+    .btn.ghost { background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted); font-weight:600 }
+    input, select {
+      width:100%; padding:12px; border-radius:10px;
+      background:var(--panel);
+      border:1px solid rgba(255,255,255,0.03);
+      color:#fff; margin-top:8px; font-size:14px;
+    }
+    label { font-size:13px; color:var(--muted) }
+    .field-row { display:grid; grid-template-columns: 1fr 1fr; gap:12px }
+    @media (max-width:680px){ .field-row{ grid-template-columns: 1fr } }
+    .notice { background: linear-gradient(90deg, rgba(255,106,0,0.06), rgba(255,106,0,0.03)); padding:10px;border-radius:8px;border:1px solid rgba(255,106,0,0.05); color:var(--muted); font-size:13px; margin-top:10px }
+    .modal-wrap { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.7); z-index:1000 }
+    .modal { max-width:620px; width:94%; padding:18px; border-radius:12px; background:#0b0b0b; border:1px solid rgba(0,255,0,0.4); box-shadow:0 12px 40px rgba(0,255,0,0.25); color:#fff }
+    .modal h3{ color:#00ff00; margin-bottom:6px; text-shadow:0 0 12px rgba(0,255,0,0.35) }
+    .mono { font-family:monospace; color:#fff; background:rgba(255,255,255,0.03); padding:10px; border-radius:8px; display:inline-block; word-break:break-all }
+    .actions { display:flex; gap:10px; margin-top:12px; flex-wrap:wrap }
+    .small-muted{ font-size:13px; color:var(--muted); margin-top:8px }
+    .hidden { display:none }
+    /* disabled look for buttons */
+    button[disabled] { opacity:0.45; cursor:not-allowed; filter:grayscale(0.25) }
+    /* space under support for extra buttons/text */
+    .support-actions { margin-top:20px; display:flex; flex-direction:column; gap:12px; align-items:stretch }
+      .modal-close-btn {
+      position:absolute;
+      top:10px;
+      right:14px;
+      background:transparent;
+      border:none;
+      color:#fff;
+      font-size:22px;
+      cursor:pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Trader Registration</h1>
+      <p class="muted">Complete the form below to register.</p>
+
+      <form id="regForm">
+        <h2>Your Details</h2>
+
+        <div class="field-row">
+          <div>
+            <label for="fullName">Full name</label>
+            <input id="fullName" name="fullName" required />
+          </div>
+          <div>
+            <label for="country">Country</label>
+            <input id="country" name="country" required />
+          </div>
+        </div>
+
+        <div class="field-row" style="margin-top:8px">
+          <div>
+            <label for="city">City</label>
+            <input id="city" name="city" />
+          </div>
+          <div>
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" required />
+          </div>
+        </div>
+
+        <div style="margin-top:8px">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required />
+        </div>
+
+        <div style="margin-top:8px">
+          <label for="telegram">Telegram ID</label>
+          <input id="telegram" name="telegram" />
+        </div>
+
+        <div style="margin-top:8px">
+          <label for="profitPlan">Profit Plan</label>
+          <select id="profitPlan" name="profitPlan" required>
+            <option value="">-- Select plan --</option>
+            <option value="A">Plan A</option>
+            <option value="B">Plan B</option>
+            <option value="C">Plan C</option>
+          </select>
+        </div>
+
+        <div style="margin-top:10px">
+          <label for="tokenField">Registration Token</label>
+          <input id="tokenField" name="tokenField" readonly placeholder="Auto-generated after submit" />
+        </div>
+
+        <button class="btn" style="margin-top:14px" type="submit">Complete Registration</button>
+      </form>
+    </div>
+
+    <aside class="card">
+      <h2>Support</h2>
+      <p class="muted">Connect to support after registration.</p>
+
+      <!-- Support actions area (buttons are disabled until registration) -->
+      <div class="support-actions">
+        <button id="depositBtn" class="btn" disabled>💰 Deposit</button>
+        <button id="withdrawBtn" class="btn ghost" disabled>↩ Withdraw</button>
+        <div id="availableHint" class="small-muted" style="display:none">Actions available: Deposit, Withdraw</div>
+      </div>
+
+    </aside>
+  </div>
+
+  <div id="modal" class="modal-wrap" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" style="position:relative;">
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">&times;</button>
+      <h3 id="modalTitle">🎉 You Are One Step Closer to Making More Money!</h3>
+      <p class="muted">Your registration is successful! Your exclusive token is generated below — keep it safe.</p>
+      <div id="modalToken" class="mono">—</div>
+      <div class="actions">
+        <button class="btn" id="copyBtn">Copy Token</button>
+        <button class="btn ghost" id="closeBtn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- Utility: generate a readable token ---
+    function generateToken() {
+      // Use crypto if available for stronger randomness
+      try {
+        const arr = new Uint8Array(8);
+        window.crypto.getRandomValues(arr);
+        return Array.from(arr).map(b => (b % 36).toString(36)).join('').toUpperCase().substring(0,10);
+      } catch (e) {
+        return Math.random().toString(36).substring(2, 12).toUpperCase();
+      }
+    }
+
+    // Cache DOM refs
+    const regForm = document.getElementById('regForm');
+    const tokenField = document.getElementById('tokenField');
+    const modalWrap = document.getElementById('modal');
+    const modal = modalWrap.querySelector('.modal');
+    const modalToken = document.getElementById('modalToken');
+    const depositBtn = document.getElementById('depositBtn');
+    const withdrawBtn = document.getElementById('withdrawBtn');
+    const availableHint = document.getElementById('availableHint');
+    const copyBtn = document.getElementById('copyBtn');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
+    const closeBtn = document.getElementById('closeBtn');
+
+    // Show modal (no redirect) and enable actions
+    function showModalWithToken(token) {
+      tokenField.value = token;
+      modalToken.innerText = token;
+      modalWrap.style.display = 'flex';
+      modalWrap.setAttribute('aria-hidden', 'false');
+      modal.style.transform = 'scale(0.9)';
+      modal.style.transition = '0.18s ease';
+      setTimeout(()=>{ modal.style.transform = 'scale(1)'; }, 10);
+
+      depositBtn.disabled = false;
+      withdrawBtn.disabled = false;
+      availableHint.style.display = 'block';
+
+      // focus copy button for accessibility
+      copyBtn.focus();
+    }
+
+    // Hide modal (no redirect)
+    function hideModal() {
+      modalWrap.style.display = 'none';
+      modalWrap.setAttribute('aria-hidden', 'true');
+    }
+
+    // Form submit handler
+    regForm.addEventListener('submit', function(e){
+      e.preventDefault();
+
+      // Basic HTML5 validation already runs; we can stop early if invalid
+      if (!regForm.checkValidity()) {
+        // let browser show errors
+        regForm.reportValidity();
+        return;
+      }
+
+      const token = generateToken();
+      showModalWithToken(token);
+    });
+
+    // Copy token then ask user whether they'd like to continue to payment
+    async function copyTokenAndOfferRedirect() {
+      const token = modalToken.innerText || tokenField.value;
+      if(!token) { alert('No token to copy'); return; }
+
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(token);
+          // Inform user
+          const go = confirm('Token copied to clipboard. Go to payment page now?');
+          if(go) window.location.href = 'payment.html';
+        } else {
+          fallbackCopyAndOfferRedirect(token);
+        }
+      } catch (err) {
+        fallbackCopyAndOfferRedirect(token);
+      }
+    }
+
+    function fallbackCopyAndOfferRedirect(text) {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        const go = confirm('Token copied to clipboard. Go to payment page now?');
+        if(go) window.location.href = 'payment.html';
+      } catch (err) {
+        // As a last resort, show the token and let user copy manually
+        const result = window.prompt('Copy your token (Ctrl/Cmd+C, Enter):', text);
+        if(result !== null) {
+          const go = confirm('Proceed to payment page?');
+          if(go) window.location.href = 'payment.html';
+        }
+      }
+    }
+
+    copyBtn.addEventListener('click', copyTokenAndOfferRedirect);
+
+    // Deposit handler
+    depositBtn.addEventListener('click', function(){
+      const token = tokenField.value;
+      if(!token){
+        if(!confirm('You have not completed registration yet. Continue to payment page?')) return;
+      }
+      window.location.href = 'payment.html';
+    });
+
+    // Withdraw handler
+    withdrawBtn.addEventListener('click', function(){
+      alert('Withdraw flow not implemented yet. You can redirect to withdraw.html if available.');
+    });
+
+    // Modal close actions
+    modalCloseBtn.addEventListener('click', hideModal);
+    closeBtn.addEventListener('click', hideModal);
+
+    // Close when clicking outside the modal content (hide instead of redirect)
+    modalWrap.addEventListener('click', function(e){
+      if(e.target === this) hideModal();
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && modalWrap.getAttribute('aria-hidden') === 'false') {
+        hideModal();
+      }
+    });
+
+    // Accessibility: prevent focus leaving modal when open (basic trap)
+    document.addEventListener('focus', function(e){
+      if(modalWrap.getAttribute('aria-hidden') === 'false' && !modal.contains(e.target)){
+        e.stopPropagation();
+        modal.querySelector('button, [tabindex], input, select, textarea')?.focus();
+      }
+    }, true);
+
+    // Initial state cleaned up (in case of reload)
+    hideModal();
+  </script>
+</body>
+</html>
