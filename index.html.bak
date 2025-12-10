@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
 </head>
 <body>
     <!-- Header -->
@@ -30,101 +30,113 @@
     <!-- Hero Section -->
     <section id="hero" class="hero fade-in-section">
         <div class="hero-content">
-            <h1>EARN WITH RASHID — POWERED BY ZULUTRADE</h1>
-            <h2>Fast & Transparent Crypto Investment Plans — 24 hrs to 1-Week Returns</h2>
-            <p>Earn With Rashid makes crypto investment simple. Invest USDT, and we trade on your behalf — you get returns in as little as 24 hours up to one week.</p>
-            <h3>How It Works:</h3>
-            
-                <li>You invest USDT</li>
-                <li>We trade in top cryptocurrencies</li>
-                <li>You get returns within 24 hrs to 1 week</li>
+            <h1>Earn With Rashid — Elite Copy Trading</h1>
+            <h2>Smart Trading Solutions Powered by ZuluTrade</h2>
+            <p>Invest USDT and let Rashid trade for you using short-cycle crypto and copy-trading strategies. Transparent, consistent, and beginner-friendly.</p>
+            <ul>
+                <li>Simple investment</li>
+                <li>Daily or weekly returns</li>
+                <li>Low-risk structured strategies</li>
             </ul>
-            <p>Minimum Investment: 500 USD</p>
-            <a href="plans.html" href="#plans" class="cta-button">Start Copy Trading Now</a>
+            <a href="#plans" class="cta-button">Start Copy Trading</a>
         </div>
         <div class="hero-bg"></div>
     </section>
 
     <!-- Key Benefits Section -->
     <section id="benefits" class="benefits fade-in-section">
-        <h2>Choose Your Plan</h2>
+        <h2>Why Choose Copy Trading?</h2>
         <div class="benefits-grid">
             <div class="benefit-card">
-                <div class="icon">⚡</div>
-                <h3>PLAN 1 — Beginner Boost</h3>
-                <p>Invest: $100 – $500
-Duration: 24 hours
-Highlights:
-Up to 2× potential in 24 hours (illustrative)
-Create your Telegram account
-Buy your plan
-Watch your money grow step-by-step
-Take your funds anytime you need</p>
+                <div class="icon">📈</div>
+                <h3>Copy Trading Advantages</h3>
+                <p>Automatically replicate successful trades from expert traders without manual effort.</p>
             </div>
             <div class="benefit-card">
-                <div class="icon">💰</div>
-                <h3>PLAN 2 — Fast Growth Plan</h3>
-                <p>Reliable returns paid every 2 days, designed to maximize your earnings efficiently.</p>
+                <div class="icon">✅</div>
+                <h3>Verified Traders</h3>
+                <p>Follow proven traders with track records of consistent performance and reliability.</p>
             </div>
             <div class="benefit-card">
-                <div class="icon">🔒</div>
-                <h3>PLAN 3 — PowerAdvance 7-Day Plan</h3>
-                <p>Consistent profits over 3 days, ideal for investors who want steady growth.</p>
+                <div class="icon">🛡️</div>
+                <h3>Low Risk Score Options</h3>
+                <p>Choose traders with low-risk strategies to minimize potential losses.</p>
             </div>
             <div class="benefit-card">
-                <div class="icon">🌍</div>
-                <h3>PLAN 4 — Elite Max 10-Day Plan</h3>
-                <p>Secure and stable returns over 7 days, best for larger investments aiming for reliable benefits.</p>
+                <div class="icon">🔍</div>
+                <h3>Transparent Results</h3>
+                <p>Real-time tracking of trades, profits, and performance metrics.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="icon">⏰</div>
+                <h3>24H & Weekly Cycles</h3>
+                <p>Flexible investment periods with quick returns in 24 hours or weekly payouts.</p>
             </div>
         </div>
     </section>
 
-    <!-- Mining Plans Section -->
+    <!-- Plans Section -->
     <section id="plans" class="plans">
-        <h2>Choose Your Trader</h2>
+        <h2>Choose Your Plan</h2>
         <div class="plans-grid">
-            <div class="plan-card">
-<h3>Name: Earn With Rashid</h3>
-<li>Country: UAE / Pak</li>
-<li>Experience: 6+ Years</li>
-<li>Specialty: Short-cycle crypto <p>Specialty: Short-cycle crypto & copy trading</p> copy trading</li>
 
-<li>Built strong beginner community</li>
-<li>Clear signals & simple strategies</li>
-<li>Expert in 24H / 7-Day trading cycles</li>
-</ul></ul>
-<button class="plan-btn">Copy Trader Rashid</button>            </div>
-            <div class="plan-card popular">
-                <h3>Rabeka FX Signals</h3>
-                <div class="price">20–40% Monthly Return</div>
-                
-                    <li>Country: Russia</li>
-                    <li>Experience: 7+ Years</li>
-                    <li>Specialty: Futures <li>Strategy: High-volume crypto trading</li> algorithmic momentum trading</li>
-                </ul>
-                <button class="buy-button" onclick="window.location.href='payment.html?plan=advanced'">Copy Rabeka FX</button>
-            </div>
             <div class="plan-card">
-                <h3>Ali SignalPro</h3>
-                <div class="price">35–60% Monthly Return</div>
-                
-                    <li>Risk Score: High (7/10)</li>
-                    <li>Experience: 6+ Years</li>
-                    <li>Strategy: Aggressive swing trading</li>
+                <h3>PLAN 1 — Beginner Boost</h3>
+                <ul>
+                    <li>Invest: $100 – $500</li>
+                    <li>Duration: 24 hours</li>
+                    <li>Up to 2× potential (illustrative)</li>
+                    <li>Simple joining</li>
+                    <li>Withdrawal anytime</li>
                 </ul>
-                <button class="buy-button" onclick="window.location.href='payment.html?plan=premium'">Copy Ali SignalPro</button>
+                <button class="plan-btn" onclick="window.location.href='payment.html'">Buy Now</button>
             </div>
+
+            <div class="plan-card">
+                <h3>PLAN 2 — Fast Growth</h3>
+                <ul>
+                    <li>Invest: $500 – $1,500</li>
+                    <li>Duration: 24 hrs OR 7-day</li>
+                    <li>+70% example modelling</li>
+                    <li>Daily updates</li>
+                    <li>Full tracking</li>
+                </ul>
+                <button class="plan-btn" onclick="window.location.href='payment.html'">Buy Now</button>
+            </div>
+
+            <div class="plan-card">
+                <h3>PLAN 3 — PowerAdvance</h3>
+                <ul>
+                    <li>Invest: $1,500 – $3,000</li>
+                    <li>Duration: 7 days</li>
+                    <li>3× sample projection</li>
+                    <li>Priority updates</li>
+                </ul>
+                <button class="plan-btn" onclick="window.location.href='payment.html'">Buy Now</button>
+            </div>
+
+            <div class="plan-card">
+                <h3>PLAN 4 — Elite Max</h3>
+                <ul>
+                    <li>Invest: $3,000 – $4,500</li>
+                    <li>Duration: 10 days</li>
+                    <li>High-return model</li>
+                    <li>VIP Support</li>
+                </ul>
+                <button class="plan-btn" onclick="window.location.href='payment.html'">Buy Now</button>
+            </div>
+
         </div>
         <p>Act Now — Deposit Today & Watch Your Investment Grow! Choose your plan, deposit immediately, and start earning from your first day.</p>
     </section>
 
     <!-- Upload QR Code Section -->
     <section id="upload" class="upload-section fade-in-section">
-        <h2>Upload Your QR Code</h2>
-        <p>Securely upload your wallet QR code for easy payouts.</p>
+        <h2 class="green-glow">Register SEE SUCCESS TRADE Start Trading Now</h2>
+        <p class="green-glow"><a href="profit1.html" style="color:inherit;text-decoration:none;">SEE ALL WINNERS OF THIS WEEK NOW</a></p>
         <div class="upload-container">
             <input type="file" id="qr-upload" accept="image/*" style="display: none;">
-            <label for="qr-upload" class="upload-button">Choose QR Code Image</label>
+            <label for="qr-upload" class="upload-button" style="color:#00ff00; text-shadow:0 0 10px #00ff00; font-weight:700;">UPLOAD YOUR PAYMENT PROOF</label>
             <div id="qr-preview" class="preview-box"></div>
         </div>
     </section>
@@ -135,7 +147,7 @@ Take your funds anytime you need</p>
         <p>Share and view trading performance screenshots.</p>
         <div class="gallery-container">
             <input type="file" id="screenshot-upload" accept="image/*" multiple style="display: none;">
-            <label for="screenshot-upload" class="upload-button">Upload Screenshots</label>
+            <label for="screenshot-upload" class="upload-button" style="color:#00ff00; text-shadow:0 0 10px #00ff00; font-weight:700;">Upload Screenshots</label>
             <div id="gallery" class="gallery-grid"></div>
         </div>
     </section>
@@ -146,43 +158,50 @@ Take your funds anytime you need</p>
         <div class="about-content">
             <div class="about-text">
                 <h3>What is Copy Trading?</h3>
-                <p>Copy trading allows you to earn cryptocurrency by copying the trades of professional traders. We handle the trading strategies, risk management, and payouts.</p>
-                <h3>Why Choose Us?</h3>
-                <p>Our platform offers top-tier security, transparency, and profitability. Join a community of successful traders.</p>
+                <p>Copy trading allows you to mirror the trades of professional traders like Earn With Rashid, giving you simple, hands-free earning potential.</p>
             </div>
             <div class="about-image">
                 <!-- Placeholder for image -->
-                <div class="placeholder">Trading Dashboard Image</div>
+                <div class="influencer-panel">
+                    <h3>⭐ Earn With Rashid — Verified Copy Trader</h3>
+                    <p><strong>197,701+ Active Followers Worldwide</strong></p>
+                    <p>Trusted expert in short-cycle crypto & copy trading. Helping beginners earn safely and consistently.</p>
+                    <ul>
+                        <li>🔸 <strong><a href="https://www.youtube.com/@EarnwithRashid" target="_blank">YouTube Channel</a></strong> — Watch results & trading proofs</li>
+                        <li>🔸 <strong><a href="https://t.me/Cryptomineprosupportbot" target="_blank">Telegram Group</a></strong> — Join for fast alerts & updates</li>
+                        <li>🔸 <strong><a href="https://bento.me/earnwithrashid" target="_blank">Official Profile</a></strong> — bento.me/earnwithrashid</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Roadmap Section -->
     <section class="roadmap fade-in-section">
-        <h2>Our Roadmap</h2>
+        <h2>How Trading Works</h2>
         <div class="timeline">
             <div class="timeline-item">
                 <div class="timeline-content">
-                    <h3>Launch</h3>
-                    <p>Platform goes live with basic mining plans.</p>
+                    <h3>Step 1 — Choose Your Plan</h3>
+                    <p>Select the best plan based on your investment amount.</p>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-content">
-                    <h3>New Mining Machines</h3>
-                    <p>Upgrade to latest ASIC miners for better efficiency.</p>
+                    <h3>Step 2 — Invest Your USDT</h3>
+                    <p>Send your chosen amount securely via the payment page.</p>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-content">
-                    <h3>Global Expansion</h3>
-                    <p>Open data centers in new regions.</p>
+                    <h3>Step 3 — Wait for the Trading Cycle</h3>
+                    <p>Your funds go into automated short-cycle trading.</p>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-content">
-                    <h3>Mobile App Release</h3>
-                    <p>Manage mining on the go with our app.</p>
+                    <h3>Step 4 — Track & Withdraw Anytime</h3>
+                    <p>Receive results, view updates, and withdraw profits easily.</p>
                 </div>
             </div>
         </div>
@@ -223,7 +242,7 @@ Take your funds anytime you need</p>
     <footer class="fade-in-section">
         <div class="footer-content">
             <div class="footer-section">
-                <h3>Earn With Rashid — Automated Copy Trading Powered by ZuluTrade</h3>
+                <h3>Earn With Rashid — Copy Trading Services</h3>
                 <p>Contact us for investment support, trading assistance, or account setup.</p>
             </div>
             <div class="footer-section">
@@ -241,7 +260,7 @@ Take your funds anytime you need</p>
                 <a href="#">Privacy Policy</a>
             </div>
         </div>
-        <p>&copy; 2023 CryptoMine Pro. All rights reserved.</p>
+        <p>&copy; 2023 Earn With Rashid. All rights reserved.</p>
     </footer>
 
     <script src="script.js"></script>
