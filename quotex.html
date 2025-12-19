@@ -1617,23 +1617,23 @@
         let reconnectAttempts = 0;
         const MAX_RECONNECT_ATTEMPTS = 5;
 
-        // Finnhub API Key
-        const FINNHUB_API_KEY = 'd52emq1r01qhp11ukeigd52emq1r01qhp11ukej0';
+        // Alpha Vantage API Key
+        const ALPHA_VANTAGE_KEY = 'NR4OZ1HHTPO1RRSU';
         
         // Asset data with price ranges and volatility - will be updated by API
         const assetData = {
-            'AUD/USD': { price: 0.6584, change: -0.12, volatility: 0.0005, category: 'forex', symbol: 'OANDA:AUD_USD', finnhub: true },
-            'EUR/USD': { price: 1.0845, change: 0.08, volatility: 0.0003, category: 'forex', symbol: 'OANDA:EUR_USD', finnhub: true },
-            'GBP/USD': { price: 1.2723, change: -0.05, volatility: 0.0004, category: 'forex', symbol: 'OANDA:GBP_USD', finnhub: true },
-            'USD/JPY': { price: 157.82, change: 0.15, volatility: 0.15, category: 'forex', symbol: 'OANDA:USD_JPY', finnhub: true },
-            'BTC/USD': { price: 43250, change: 2.34, volatility: 50, category: 'crypto', symbol: 'BINANCE:BTCUSDT', finnhub: true },
-            'ETH/USD': { price: 2650, change: -1.12, volatility: 15, category: 'crypto', symbol: 'BINANCE:ETHUSDT', finnhub: true },
-            'AAPL': { price: 195.00, change: 0.50, volatility: 2, category: 'stocks', symbol: 'AAPL', finnhub: true },
-            'GOOGL': { price: 140.00, change: -0.30, volatility: 1.5, category: 'stocks', symbol: 'GOOGL', finnhub: true },
-            'MSFT': { price: 380.00, change: 0.80, volatility: 3, category: 'stocks', symbol: 'MSFT', finnhub: true },
-            'TSLA': { price: 245.00, change: 1.20, volatility: 5, category: 'stocks', symbol: 'TSLA', finnhub: true },
-            'AMZN': { price: 155.00, change: -0.40, volatility: 2.5, category: 'stocks', symbol: 'AMZN', finnhub: true },
-            'NVDA': { price: 495.00, change: 2.10, volatility: 8, category: 'stocks', symbol: 'NVDA', finnhub: true }
+            'AUD/USD': { price: 0.6584, change: -0.12, volatility: 0.0005, category: 'forex', symbol: 'FX_DAILY&from_symbol=AUD&to_symbol=USD', finnhub: true },
+            'EUR/USD': { price: 1.0845, change: 0.08, volatility: 0.0003, category: 'forex', symbol: 'FX_DAILY&from_symbol=EUR&to_symbol=USD', finnhub: true },
+            'GBP/USD': { price: 1.2723, change: -0.05, volatility: 0.0004, category: 'forex', symbol: 'FX_DAILY&from_symbol=GBP&to_symbol=USD', finnhub: true },
+            'USD/JPY': { price: 157.82, change: 0.15, volatility: 0.15, category: 'forex', symbol: 'FX_DAILY&from_symbol=USD&to_symbol=JPY', finnhub: true },
+            'BTC/USD': { price: 43250, change: 2.34, volatility: 50, category: 'crypto', symbol: 'DIGITAL_CURRENCY_DAILY&symbol=BTC&market=USD', finnhub: true },
+            'ETH/USD': { price: 2650, change: -1.12, volatility: 15, category: 'crypto', symbol: 'DIGITAL_CURRENCY_DAILY&symbol=ETH&market=USD', finnhub: true },
+            'AAPL': { price: 195.00, change: 0.50, volatility: 2, category: 'stocks', symbol: 'TIME_SERIES_DAILY&symbol=AAPL', finnhub: true },
+            'GOOGL': { price: 140.00, change: -0.30, volatility: 1.5, category: 'stocks', symbol: 'TIME_SERIES_DAILY&symbol=GOOGL', finnhub: true },
+            'MSFT': { price: 380.00, change: 0.80, volatility: 3, category: 'stocks', symbol: 'TIME_SERIES_DAILY&symbol=MSFT', finnhub: true },
+            'TSLA': { price: 245.00, change: 1.20, volatility: 5, category: 'stocks', symbol: 'TIME_SERIES_DAILY&symbol=TSLA', finnhub: true },
+            'AMZN': { price: 155.00, change: -0.40, volatility: 2.5, category: 'stocks', symbol: 'TIME_SERIES_DAILY&symbol=AMZN', finnhub: true },
+            'NVDA': { price: 495.00, change: 2.10, volatility: 8, category: 'stocks', symbol: 'TIME_SERIES_DAILY&symbol=NVDA', finnhub: true }
         };
 
         // Statistics tracking
