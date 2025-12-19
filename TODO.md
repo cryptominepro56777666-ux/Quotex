@@ -1,3 +1,14 @@
+# Quotex Button Addition
+
+## Completed Tasks
+- [x] Add "Quotex" button to index.html hero section
+- [x] Style the button with green color and hover effect
+- [x] Create basic quotex.html page as placeholder
+- [x] Implement COMMAND 1: Demo Environment Initialization in quotex.html
+
+## Pending Tasks
+- [ ] Await next commands for further development of quotex.html
+
 # Mobile Responsiveness Fixes
 
 ## Completed Tasks
