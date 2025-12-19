@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "framer-motion": "^12.23.25",
-    "lightweight-charts": "^5.0.9"
-  }
-}
